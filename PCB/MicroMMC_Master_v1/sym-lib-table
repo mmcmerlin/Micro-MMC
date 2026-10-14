@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "MicroMMC_MMC_Master") (type "KiCad") (uri "C:/Users/mmerlin/Documents/GitHub/Micro-MMC/PCB/MMC_Master/MicroMMC_MMC_Master.kicad_sym") (options "") (descr ""))
+)

@@ -1,0 +1,21 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "2ab75934-9bb9-4719-a2f9-e95492bad3d9")
+	(paper "A3")
+	(title_block
+		(title "Master Board for Micro-MMC")
+		(date "2026-07-14")
+		(rev "A")
+		(company "University of Edinburgh")
+		(comment 1 "Author: Michael M.C. Merlin")
+	)
+	(lib_symbols)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

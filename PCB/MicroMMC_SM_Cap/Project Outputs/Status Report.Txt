@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [MicroMMC_SM_Cap.PrjPcb]
+   Generated File[MicroMMC_SM_Cap.TXT]
+   Generated File[MicroMMC_SM_Cap.LDP]
+   Generated File[MicroMMC_SM_Cap.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 23:58:44 On 03/06/2025

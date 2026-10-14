@@ -1,0 +1,673 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD22\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">03/06/2025</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">23:58:16</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc">C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">95</td></tr>
+</table>
+</td>
+</table><a name="ID3UTWHGXVHWOHFWJWJ1KH2L2NWBO5LCH24JHGKFLWRXM5I5FNSEXB"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOQ3OIIS2JLUED2D5TEMN0D2Q5CIX4KUDN042KKDCV5T1FIEKLOK">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5LBOKH2OLYTVK44VAFI4JVYDEEPEC0ECS1PYRRI00ANF0RCAE3SN">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDUUTEEKDNPDKOSZHRI5T5MH3G4DKEZZGGQXOJPN0L1HI54EBW4">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKDXDS2M0OZZDMI1FVV4SHMLU0F1EX0FHHBVGFYIFQV0LI0LHRZ5N">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPD3NNNTUATZ1EKZE0FSPTRAUGCT0LJZ3L12OQLC2ZSRUJNVEGWOH">Width Constraint (Min=0.152mm) (Max=0.762mm) (Preferred=0.381mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDGZJY340WHOOKN0AR1FZXFBYXYERTTSJ5Q0MDDIJ4JPUOMECRUFPP">Routing Layers(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID3NNHY0I20LNMCBSQVX5YEK312PWLYQAQAQCBNGLWBQRJU4BXPL4L">Routing Via (MinHoleWidth=0.3mm) (MaxHoleWidth=6mm) (PreferredHoleWidth=1mm) (MinWidth=0.45mm) (MaxWidth=12mm) (PreferedWidth=2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWIC2E25Q5JX2IDZSHXMQFGDRFI4STUWAFUVV4TMXE355Q0LFIRSN">Differential Pairs Uncoupled Length using the Gap Constraints (Min=0.254mm) (Max=0.254mm) (Prefered=0.254mm)  and Width Constraints (Min=0.381mm) (Max=0.381mm) (Prefered=0.381mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFFBDVXXL1RHXDHH3SI0QIU0MOZOZWENMGFMKBGXJEOSWHYBI3LK">Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0IUGUXAK4AESMYPVSLSA4Y5YLGFRLMXHTVGZ5IPMHRMDR1GI0P5E">Hole Size Constraint (Min=0.25mm) (Max=6mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAOBQX3DVVU0AL3LP1FWQIBXYCECQEIZGYDNWPMDTCKDZRVB3EI5O">Pads and Vias to follow the Drill pairs settings</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZDFO1AUQXQWIC0WYCIJ3AYZIZNPES4EJCTSXQ2L4OERVRU2UJLUH">Hole To Hole Clearance (Gap=0.6mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDM2BD3U0LSEBUFXP2FX2SP2UJ23ALTJRPIFWODPU05TKXTVLIYIK">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBLGQWBIN51RGD5YHUHRYFKYOINBBVC325IMWQTHMSQV00XMKWJXO">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">28</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDL3EUH43UUKPMNB5F2DY5LG34UJ10DYEYMWRTO1NT20GWHU0J0PXM">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">24</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJUI51NL42EVWL3Y2GU0G1OXDCKZJ32N3LHVAEUBFDHZPDXAA1NLH">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2SLW2ZBBA2S5G1JV12I5ILAHCCOUEWWOCPLDAUND2Y5TXYLZSA0H">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">38</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2W4HLTRDZ4QKGHAW4CG5GQFZUGUAI2VAFDOBYWEQYJL4HMLPRHFJ">Component Clearance Constraint ( Horizontal Gap = 0.254mm, Vertical Gap = 0.254mm ) (All),(All) </a></td>
+<td class="column2">5</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAPBOMLOQCQCKJR4XA0W21NVWKXBFIWZQEIE5ZNWM5FB1OSWAQ3K">Height Constraint (Min=0mm) (Max=100mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">95</td>
+</tr>
+</table><br><a name="IDBLGQWBIN51RGD5YHUHRYFKYOINBBVC325IMWQTHMSQV00XMKWJXO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8024.58mil|Location2.X=8032.246mil|Location1.Y=5326.723mil|Location2.Y=5334.39mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8024.58mil|Location2.X=8032.246mil|Location1.Y=5326.723mil|Location2.Y=5334.39mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (13mm,20.75mm) on Bottom Overlay And Pad J?-4(16.655mm,23.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7994.482mil|Location2.X=8002.148mil|Location1.Y=4467.139mil|Location2.Y=4474.805mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7994.482mil|Location2.X=8002.148mil|Location1.Y=4467.139mil|Location2.Y=4474.805mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (13mm,4.25mm) on Bottom Overlay And Pad J?-4(16.655mm,1.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7751.078mil|Location2.X=7762.328mil|Location1.Y=4706.699mil|Location2.Y=4717.949mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7751.078mil|Location2.X=7762.328mil|Location1.Y=4706.699mil|Location2.Y=4717.949mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.165mm &lt; 0.254mm) Between Arc (13mm,4.25mm) on Bottom Overlay And Pad R1-2(9mm,7.9mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0.165mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8319.818mil|Location2.X=8327.485mil|Location1.Y=5371.374mil|Location2.Y=5379.04mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8319.818mil|Location2.X=8327.485mil|Location1.Y=5371.374mil|Location2.Y=5379.04mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (21.5mm,20.75mm) on Bottom Overlay And Pad J?-1(24.275mm,23.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.08mil|Location2.X=8096.747mil|Location1.Y=5349.045mil|Location2.Y=5356.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.08mil|Location2.X=8096.747mil|Location1.Y=5349.045mil|Location2.Y=5356.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (21.5mm,20.75mm) on Bottom Overlay And Pad J?-3(19.195mm,23.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8321.625mil|Location2.X=8329.291mil|Location1.Y=4460.66mil|Location2.Y=4468.327mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8321.625mil|Location2.X=8329.291mil|Location1.Y=4460.66mil|Location2.Y=4468.327mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (21.5mm,4.25mm) on Bottom Overlay And Pad J?-1(24.275mm,1.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.925mil|Location2.X=8097.591mil|Location1.Y=4480.565mil|Location2.Y=4488.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.925mil|Location2.X=8097.591mil|Location1.Y=4480.565mil|Location2.Y=4488.231mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (21.5mm,4.25mm) on Bottom Overlay And Pad J?-3(19.195mm,1.5mm) on Multi-Layer [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8320.317mil|Location2.X=8331.567mil|Location1.Y=5238.314mil|Location2.Y=5249.564mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8320.317mil|Location2.X=8331.567mil|Location1.Y=5238.314mil|Location2.Y=5249.564mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm1-1(23.25mm,20.75mm) on Multi-Layer And Text "+" (24.3mm,21.5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8106.005mil|Location2.X=8117.255mil|Location1.Y=5238.305mil|Location2.Y=5249.555mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8106.005mil|Location2.X=8117.255mil|Location1.Y=5238.305mil|Location2.Y=5249.555mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm1-2(19.75mm,20.75mm) on Multi-Layer And Track (17.75mm,20.75mm)(18.5mm,20.75mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8320.317mil|Location2.X=8331.567mil|Location1.Y=4588.708mil|Location2.Y=4599.958mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8320.317mil|Location2.X=8331.567mil|Location1.Y=4588.708mil|Location2.Y=4599.958mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm2-1(23.25mm,4.25mm) on Multi-Layer And Text "+" (24.3mm,5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8106.005mil|Location2.X=8117.255mil|Location1.Y=4588.698mil|Location2.Y=4599.948mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8106.005mil|Location2.X=8117.255mil|Location1.Y=4588.698mil|Location2.Y=4599.948mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm2-2(19.75mm,4.25mm) on Multi-Layer And Track (17.75mm,4.25mm)(18.5mm,4.25mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8320.317mil|Location2.X=8331.567mil|Location1.Y=4913.511mil|Location2.Y=4924.761mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8320.317mil|Location2.X=8331.567mil|Location1.Y=4913.511mil|Location2.Y=4924.761mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm3-1(23.25mm,12.5mm) on Multi-Layer And Text "+" (24.3mm,13.25mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8106.005mil|Location2.X=8117.255mil|Location1.Y=4913.502mil|Location2.Y=4924.752mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8106.005mil|Location2.X=8117.255mil|Location1.Y=4913.502mil|Location2.Y=4924.752mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm3-2(19.75mm,12.5mm) on Multi-Layer And Track (17.75mm,12.5mm)(18.5mm,12.5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7985.671mil|Location2.X=7996.921mil|Location1.Y=5238.314mil|Location2.Y=5249.564mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7985.671mil|Location2.X=7996.921mil|Location1.Y=5238.314mil|Location2.Y=5249.564mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm4-1(14.75mm,20.75mm) on Multi-Layer And Text "+" (15.8mm,21.5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7771.359mil|Location2.X=7782.609mil|Location1.Y=5238.305mil|Location2.Y=5249.555mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7771.359mil|Location2.X=7782.609mil|Location1.Y=5238.305mil|Location2.Y=5249.555mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm4-2(11.25mm,20.75mm) on Multi-Layer And Track (9.25mm,20.75mm)(10mm,20.75mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7985.671mil|Location2.X=7996.921mil|Location1.Y=4913.511mil|Location2.Y=4924.761mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7985.671mil|Location2.X=7996.921mil|Location1.Y=4913.511mil|Location2.Y=4924.761mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm5-1(14.75mm,12.5mm) on Multi-Layer And Text "+" (15.8mm,13.25mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7771.359mil|Location2.X=7782.609mil|Location1.Y=4913.502mil|Location2.Y=4924.752mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7771.359mil|Location2.X=7782.609mil|Location1.Y=4913.502mil|Location2.Y=4924.752mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm5-2(11.25mm,12.5mm) on Multi-Layer And Track (9.25mm,12.5mm)(10mm,12.5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7651.025mil|Location2.X=7662.275mil|Location1.Y=5238.314mil|Location2.Y=5249.564mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7651.025mil|Location2.X=7662.275mil|Location1.Y=5238.314mil|Location2.Y=5249.564mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm6-1(6.25mm,20.75mm) on Multi-Layer And Text "+" (7.3mm,21.5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7436.714mil|Location2.X=7447.964mil|Location1.Y=5238.305mil|Location2.Y=5249.555mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7436.714mil|Location2.X=7447.964mil|Location1.Y=5238.305mil|Location2.Y=5249.555mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm6-2(2.75mm,20.75mm) on Multi-Layer And Track (0.75mm,20.75mm)(1.5mm,20.75mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7651.025mil|Location2.X=7662.275mil|Location1.Y=4913.511mil|Location2.Y=4924.761mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7651.025mil|Location2.X=7662.275mil|Location1.Y=4913.511mil|Location2.Y=4924.761mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm7-1(6.25mm,12.5mm) on Multi-Layer And Text "+" (7.3mm,13.25mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7436.714mil|Location2.X=7447.964mil|Location1.Y=4913.502mil|Location2.Y=4924.752mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7436.714mil|Location2.X=7447.964mil|Location1.Y=4913.502mil|Location2.Y=4924.752mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm7-2(2.75mm,12.5mm) on Multi-Layer And Track (0.75mm,12.5mm)(1.5mm,12.5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7985.671mil|Location2.X=7996.921mil|Location1.Y=4588.708mil|Location2.Y=4599.958mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7985.671mil|Location2.X=7996.921mil|Location1.Y=4588.708mil|Location2.Y=4599.958mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.086mm &lt; 0.254mm) Between Pad Csm8-1(14.75mm,4.25mm) on Multi-Layer And Text "+" (15.8mm,5mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7771.36mil|Location2.X=7782.61mil|Location1.Y=4588.698mil|Location2.Y=4599.948mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7771.36mil|Location2.X=7782.61mil|Location1.Y=4588.698mil|Location2.Y=4599.948mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad Csm8-2(11.25mm,4.25mm) on Multi-Layer And Track (9.25mm,4.25mm)(10mm,4.25mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7458.947mil|Location2.X=7466.613mil|Location1.Y=4734.191mil|Location2.Y=4741.857mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7458.947mil|Location2.X=7466.613mil|Location1.Y=4734.191mil|Location2.Y=4741.857mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad R1-1(1.38mm,7.9mm) on Multi-Layer And Track (2.269mm,7.9mm)(2.65mm,7.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7462.38mil|Location2.X=7473.63mil|Location1.Y=4732.399mil|Location2.Y=4743.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7462.38mil|Location2.X=7473.63mil|Location1.Y=4732.399mil|Location2.Y=4743.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.243mm &lt; 0.254mm) Between Pad R1-1(1.38mm,7.9mm) on Multi-Layer And Track (2.65mm,7.9mm)(2.65mm,6.757mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.243mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7462.38mil|Location2.X=7473.63mil|Location1.Y=4732.399mil|Location2.Y=4743.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7462.38mil|Location2.X=7473.63mil|Location1.Y=4732.399mil|Location2.Y=4743.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.243mm &lt; 0.254mm) Between Pad R1-1(1.38mm,7.9mm) on Multi-Layer And Track (2.65mm,7.9mm)(2.65mm,9.043mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.243mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7688.498mil|Location2.X=7696.164mil|Location1.Y=4734.191mil|Location2.Y=4741.857mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7688.498mil|Location2.X=7696.164mil|Location1.Y=4734.191mil|Location2.Y=4741.857mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad R1-2(9mm,7.9mm) on Multi-Layer And Track (7.73mm,7.9mm)(8.111mm,7.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7681.93mil|Location2.X=7693.18mil|Location1.Y=4732.399mil|Location2.Y=4743.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7681.93mil|Location2.X=7693.18mil|Location1.Y=4732.399mil|Location2.Y=4743.649mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.243mm &lt; 0.254mm) Between Pad R1-2(9mm,7.9mm) on Multi-Layer And Track (7.73mm,9.043mm)(7.73mm,6.757mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.243mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDL3EUH43UUKPMNB5F2DY5LG34UJ10DYEYMWRTO1NT20GWHU0J0PXM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5385.566mil|Location2.Y=5393.233mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5385.566mil|Location2.Y=5393.233mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (13mm,20.75mm) on Bottom Overlay And Text "SM+
+CAP" (15.4mm,22mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4445.02mil|Location2.Y=4452.687mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4445.02mil|Location2.Y=4452.687mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (13mm,4.25mm) on Bottom Overlay And Text "SM-
+GND" (15.4mm,0mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7960.167mil|Location2.X=7967.834mil|Location1.Y=5131.828mil|Location2.Y=5139.495mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7960.167mil|Location2.X=7967.834mil|Location1.Y=5131.828mil|Location2.Y=5139.495mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "06/2025" (15mm,18mm) on Top Overlay And Text "ver1.00" (5.7mm,18mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7960.167mil|Location2.X=7967.834mil|Location1.Y=5131.828mil|Location2.Y=5139.495mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7960.167mil|Location2.X=7967.834mil|Location1.Y=5131.828mil|Location2.Y=5139.495mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "06/2025" (15mm,18mm) on Top Overlay And Text "µMMC SM Cap Board" (5.7mm,15.5mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7594.025mil|Location2.X=7601.692mil|Location1.Y=5033.403mil|Location2.Y=5041.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7594.025mil|Location2.X=7601.692mil|Location1.Y=5033.403mil|Location2.Y=5041.07mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "MMC Merlin" (5.7mm,14mm) on Top Overlay And Text "µMMC SM Cap Board" (5.7mm,15.5mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7794.813mil|Location2.X=7802.48mil|Location1.Y=4486.063mil|Location2.Y=4493.729mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7794.813mil|Location2.X=7802.48mil|Location1.Y=4486.063mil|Location2.Y=4493.729mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (10.9mm,0mm) on Top Overlay And Track (10.8mm,0.1mm)(10.8mm,2.9mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=4427.104mil|Location2.Y=4434.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=4427.104mil|Location2.Y=4434.771mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (10.9mm,0mm) on Top Overlay And Track (10.8mm,0.1mm)(25.8mm,0.1mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=4537.34mil|Location2.Y=4545.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=4537.34mil|Location2.Y=4545.007mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (10.9mm,0mm) on Top Overlay And Track (10.8mm,2.9mm)(25.8mm,2.9mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=4432.222mil|Location2.Y=4439.889mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=4432.222mil|Location2.Y=4439.889mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (10.9mm,0mm) on Top Overlay And Track (15.195mm,0.23mm)(15.195mm,2.77mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=4432.222mil|Location2.Y=4439.889mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=4432.222mil|Location2.Y=4439.889mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (10.9mm,0mm) on Top Overlay And Track (15.195mm,0.23mm)(25.735mm,0.23mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=4532.222mil|Location2.Y=4539.889mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=4532.222mil|Location2.Y=4539.889mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (10.9mm,0mm) on Top Overlay And Track (15.195mm,2.77mm)(25.735mm,2.77mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4486.063mil|Location2.Y=4493.729mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4486.063mil|Location2.Y=4493.729mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (15.4mm,0mm) on Bottom Overlay And Track (10.8mm,0.1mm)(10.8mm,2.9mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4427.104mil|Location2.Y=4434.771mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4427.104mil|Location2.Y=4434.771mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (15.4mm,0mm) on Bottom Overlay And Track (10.8mm,0.1mm)(25.8mm,0.1mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4537.34mil|Location2.Y=4545.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=4537.34mil|Location2.Y=4545.007mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM-
+GND" (15.4mm,0mm) on Bottom Overlay And Track (10.8mm,2.9mm)(25.8mm,2.9mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7794.813mil|Location2.X=7802.48mil|Location1.Y=5352.177mil|Location2.Y=5359.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7794.813mil|Location2.X=7802.48mil|Location1.Y=5352.177mil|Location2.Y=5359.843mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (10.9mm,22mm) on Top Overlay And Track (10.8mm,22.1mm)(10.8mm,24.9mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=5293.246mil|Location2.Y=5300.913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=5293.246mil|Location2.Y=5300.913mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (10.9mm,22mm) on Top Overlay And Track (10.8mm,22.1mm)(25.8mm,22.1mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=5403.482mil|Location2.Y=5411.149mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.417mil|Location1.Y=5403.482mil|Location2.Y=5411.149mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (10.9mm,22mm) on Top Overlay And Track (10.8mm,24.9mm)(25.8mm,24.9mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=5298.364mil|Location2.Y=5306.031mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=5298.364mil|Location2.Y=5306.031mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (10.9mm,22mm) on Top Overlay And Track (15.195mm,22.23mm)(15.195mm,24.77mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=5298.364mil|Location2.Y=5306.031mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=5298.364mil|Location2.Y=5306.031mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (10.9mm,22mm) on Top Overlay And Track (15.195mm,22.23mm)(25.735mm,22.23mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=5398.364mil|Location2.Y=5406.031mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7967.843mil|Location2.X=7975.51mil|Location1.Y=5398.364mil|Location2.Y=5406.031mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (10.9mm,22mm) on Top Overlay And Track (15.195mm,24.77mm)(25.735mm,24.77mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5352.177mil|Location2.Y=5359.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5352.177mil|Location2.Y=5359.843mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (15.4mm,22mm) on Bottom Overlay And Track (10.8mm,22.1mm)(10.8mm,24.9mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5293.246mil|Location2.Y=5300.913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5293.246mil|Location2.Y=5300.913mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (15.4mm,22mm) on Bottom Overlay And Track (10.8mm,22.1mm)(25.8mm,22.1mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5403.482mil|Location2.Y=5411.149mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7798.75mil|Location2.X=7806.416mil|Location1.Y=5403.482mil|Location2.Y=5411.149mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "SM+
+CAP" (15.4mm,22mm) on Bottom Overlay And Track (10.8mm,24.9mm)(25.8mm,24.9mm) on Bottom Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7594.025mil|Location2.X=7601.692mil|Location1.Y=5131.828mil|Location2.Y=5139.495mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7594.025mil|Location2.X=7601.692mil|Location1.Y=5131.828mil|Location2.Y=5139.495mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "ver1.00" (5.7mm,18mm) on Top Overlay And Text "µMMC SM Cap Board" (5.7mm,15.5mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID2SLW2ZBBA2S5G1JV12I5ILAHCCOUEWWOCPLDAUND2Y5TXYLZSA0H"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7880.167mil|Location2.X=7890.353mil|Location1.Y=5408.312mil|Location2.Y=5418.498mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7880.167mil|Location2.X=7890.353mil|Location1.Y=5408.312mil|Location2.Y=5418.498mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Arc (13mm,20.75mm) on Bottom Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7880.167mil|Location2.X=7890.353mil|Location1.Y=4419.755mil|Location2.Y=4429.941mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7880.167mil|Location2.X=7890.353mil|Location1.Y=4419.755mil|Location2.Y=4429.941mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Arc (13mm,4.25mm) on Bottom Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8386.604mil|Location2.X=8401.633mil|Location1.Y=4911.612mil|Location2.Y=4926.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8386.604mil|Location2.X=8401.633mil|Location1.Y=4911.612mil|Location2.Y=4926.641mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.15mm &lt; 0.35mm) Between Arc (21.5mm,12.5mm) on Bottom Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8214.813mil|Location2.X=8224.999mil|Location1.Y=5408.312mil|Location2.Y=5418.498mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8214.813mil|Location2.X=8224.999mil|Location1.Y=5408.312mil|Location2.Y=5418.498mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Arc (21.5mm,20.75mm) on Bottom Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8214.813mil|Location2.X=8224.999mil|Location1.Y=4419.755mil|Location2.Y=4429.941mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8214.813mil|Location2.X=8224.999mil|Location1.Y=4419.755mil|Location2.Y=4429.941mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Arc (21.5mm,4.25mm) on Bottom Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7368.887mil|Location2.X=7383.917mil|Location1.Y=4911.612mil|Location2.Y=4926.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7368.887mil|Location2.X=7383.917mil|Location1.Y=4911.612mil|Location2.Y=4926.641mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.15mm &lt; 0.35mm) Between Arc (4.5mm,12.5mm) on Bottom Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7545.522mil|Location2.X=7555.708mil|Location1.Y=5408.312mil|Location2.Y=5418.498mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7545.522mil|Location2.X=7555.708mil|Location1.Y=5408.312mil|Location2.Y=5418.498mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Arc (4.5mm,20.75mm) on Bottom Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7886.073mil|Location2.X=7896.259mil|Location1.Y=4421.907mil|Location2.Y=4432.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7886.073mil|Location2.X=7896.259mil|Location1.Y=4421.907mil|Location2.Y=4432.093mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Text "SM-
+GND" (10.9mm,0mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7886.073mil|Location2.X=7896.259mil|Location1.Y=4421.907mil|Location2.Y=4432.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7886.073mil|Location2.X=7896.259mil|Location1.Y=4421.907mil|Location2.Y=4432.093mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Text "SM-
+GND" (15.4mm,0mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7795.069mil|Location2.X=7810.098mil|Location1.Y=5403.738mil|Location2.Y=5418.767mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7795.069mil|Location2.X=7810.098mil|Location1.Y=5403.738mil|Location2.Y=5418.767mil|Absolute=True">Board Outline Clearance(Outline Edge): (0mm &lt; 0.35mm) Between Board Edge And Text "SM+
+CAP" (10.9mm,22mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7795.068mil|Location2.X=7810.098mil|Location1.Y=5403.738mil|Location2.Y=5418.767mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7795.068mil|Location2.X=7810.098mil|Location1.Y=5403.738mil|Location2.Y=5418.767mil|Absolute=True">Board Outline Clearance(Outline Edge): (0mm &lt; 0.35mm) Between Board Edge And Text "SM+
+CAP" (15.4mm,22mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=4421.17mil|Location2.Y=4431.356mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=4421.17mil|Location2.Y=4431.356mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,0.1mm)(10.8mm,2.9mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=4421.17mil|Location2.Y=4431.356mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=4421.17mil|Location2.Y=4431.356mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,0.1mm)(10.8mm,2.9mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=4423.66mil|Location2.Y=4433.846mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=4423.66mil|Location2.Y=4433.846mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,0.1mm)(25.8mm,0.1mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=4423.66mil|Location2.Y=4433.846mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=4423.66mil|Location2.Y=4433.846mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,0.1mm)(25.8mm,0.1mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=4533.659mil|Location2.Y=4548.688mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=4533.659mil|Location2.Y=4548.688mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.073mm &lt; 0.35mm) Between Board Edge And Track (10.8mm,2.9mm)(25.8mm,2.9mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=4533.659mil|Location2.Y=4548.688mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=4533.659mil|Location2.Y=4548.688mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.073mm &lt; 0.35mm) Between Board Edge And Track (10.8mm,2.9mm)(25.8mm,2.9mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=5406.897mil|Location2.Y=5417.083mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=5406.897mil|Location2.Y=5417.083mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,22.1mm)(10.8mm,24.9mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=5406.897mil|Location2.Y=5417.083mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7793.553mil|Location2.X=7803.739mil|Location1.Y=5406.897mil|Location2.Y=5417.083mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,22.1mm)(10.8mm,24.9mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=5289.565mil|Location2.Y=5304.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=5289.565mil|Location2.Y=5304.594mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.073mm &lt; 0.35mm) Between Board Edge And Track (10.8mm,22.1mm)(25.8mm,22.1mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=5289.565mil|Location2.Y=5304.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8388.12mil|Location2.X=8403.149mil|Location1.Y=5289.565mil|Location2.Y=5304.594mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.073mm &lt; 0.35mm) Between Board Edge And Track (10.8mm,22.1mm)(25.8mm,22.1mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=5404.407mil|Location2.Y=5414.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=5404.407mil|Location2.Y=5414.593mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,24.9mm)(25.8mm,24.9mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=5404.407mil|Location2.Y=5414.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8089.755mil|Location2.X=8099.941mil|Location1.Y=5404.407mil|Location2.Y=5414.593mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (10.8mm,24.9mm)(25.8mm,24.9mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7964.162mil|Location2.X=7979.191mil|Location1.Y=4422.045mil|Location2.Y=4437.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7964.162mil|Location2.X=7979.191mil|Location1.Y=4422.045mil|Location2.Y=4437.074mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.13mm &lt; 0.35mm) Between Board Edge And Track (15.195mm,0.23mm)(15.195mm,2.77mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.415mil|Location1.Y=4424.245mil|Location2.Y=4443.364mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.415mil|Location1.Y=4424.245mil|Location2.Y=4443.364mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.109mm &lt; 0.35mm) Between Board Edge And Track (15.195mm,0.23mm)(25.735mm,0.23mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8386.308mil|Location2.X=8401.338mil|Location1.Y=4528.541mil|Location2.Y=4543.57mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8386.308mil|Location2.X=8401.338mil|Location1.Y=4528.541mil|Location2.Y=4543.57mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.165mm &lt; 0.35mm) Between Board Edge And Track (15.195mm,2.77mm)(25.735mm,2.77mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7964.162mil|Location2.X=7979.191mil|Location1.Y=5401.179mil|Location2.Y=5416.208mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7964.162mil|Location2.X=7979.191mil|Location1.Y=5401.179mil|Location2.Y=5416.208mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.13mm &lt; 0.35mm) Between Board Edge And Track (15.195mm,22.23mm)(15.195mm,24.77mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8386.308mil|Location2.X=8401.338mil|Location1.Y=5294.683mil|Location2.Y=5309.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8386.308mil|Location2.X=8401.338mil|Location1.Y=5294.683mil|Location2.Y=5309.712mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.165mm &lt; 0.35mm) Between Board Edge And Track (15.195mm,22.23mm)(25.735mm,22.23mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.537mil|Location1.Y=5395.011mil|Location2.Y=5414.008mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.537mil|Location1.Y=5395.011mil|Location2.Y=5414.008mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.109mm &lt; 0.35mm) Between Board Edge And Track (15.195mm,24.77mm)(25.735mm,24.77mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7470.265mil|Location2.X=7485.295mil|Location1.Y=4677.95mil|Location2.Y=4692.98mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7470.265mil|Location2.X=7485.295mil|Location1.Y=4677.95mil|Location2.Y=4692.98mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.13mm &lt; 0.35mm) Between Board Edge And Track (2.65mm,6.757mm)(7.73mm,6.757mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7470.265mil|Location2.X=7485.295mil|Location1.Y=4677.95mil|Location2.Y=4692.98mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7470.265mil|Location2.X=7485.295mil|Location1.Y=4677.95mil|Location2.Y=4692.98mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.13mm &lt; 0.35mm) Between Board Edge And Track (2.65mm,7.9mm)(2.65mm,6.757mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.415mil|Location1.Y=4424.245mil|Location2.Y=4443.364mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.415mil|Location1.Y=4424.245mil|Location2.Y=4443.364mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.109mm &lt; 0.35mm) Between Board Edge And Track (25.735mm,0.23mm)(25.735mm,2.77mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.537mil|Location1.Y=5395.011mil|Location2.Y=5414.008mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8383.418mil|Location2.X=8402.537mil|Location1.Y=5395.011mil|Location2.Y=5414.008mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.109mm &lt; 0.35mm) Between Board Edge And Track (25.735mm,22.23mm)(25.735mm,24.77mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=4423.876mil|Location2.Y=4434.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=4423.876mil|Location2.Y=4434.062mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (25.8mm,0.1mm)(25.8mm,2.9mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=4423.876mil|Location2.Y=4434.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=4423.876mil|Location2.Y=4434.062mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (25.8mm,0.1mm)(25.8mm,2.9mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=5404.191mil|Location2.Y=5414.377mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=5404.191mil|Location2.Y=5414.377mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (25.8mm,22.1mm)(25.8mm,24.9mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=5404.191mil|Location2.Y=5414.377mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8385.03mil|Location2.X=8395.217mil|Location1.Y=5404.191mil|Location2.Y=5414.377mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.35mm) Between Board Edge And Track (25.8mm,22.1mm)(25.8mm,24.9mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7670.265mil|Location2.X=7685.295mil|Location1.Y=4677.95mil|Location2.Y=4692.98mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7670.265mil|Location2.X=7685.295mil|Location1.Y=4677.95mil|Location2.Y=4692.98mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.13mm &lt; 0.35mm) Between Board Edge And Track (7.73mm,9.043mm)(7.73mm,6.757mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID2W4HLTRDZ4QKGHAW4CG5GQFZUGUAI2VAFDOBYWEQYJL4HMLPRHFJ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Component Clearance Constraint ( Horizontal Gap = 0.254mm, Vertical Gap = 0.254mm ) (All),(All) </th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8307.696mil|Location2.X=8318.946mil|Location1.Y=4465.622mil|Location2.Y=4476.872mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8307.696mil|Location2.X=8318.946mil|Location1.Y=4465.622mil|Location2.Y=4476.872mil|Absolute=True">Component Clearance Constraint: (Collision &lt; 0.254mm) Between SIP Component J?-TSW-104-08-L-S (24.275mm,1.5mm) on Top Layer And Small Component Csm2-860010474012 (21.5mm,4.25mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8008.764mil|Location2.X=8020.014mil|Location1.Y=4494.548mil|Location2.Y=4505.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8008.764mil|Location2.X=8020.014mil|Location1.Y=4494.548mil|Location2.Y=4505.798mil|Absolute=True">Component Clearance Constraint: (Collision &lt; 0.254mm) Between SIP Component J?-TSW-104-08-L-S (24.275mm,1.5mm) on Top Layer And Small Component Csm8-860010474012 (13mm,4.25mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8129.873mil|Location2.X=8141.123mil|Location1.Y=5363.993mil|Location2.Y=5375.243mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8129.873mil|Location2.X=8141.123mil|Location1.Y=5363.993mil|Location2.Y=5375.243mil|Absolute=True">Component Clearance Constraint: (Collision &lt; 0.254mm) Between SIP Component J?-TSW-104-08-L-S (24.275mm,23.5mm) on Top Layer And Small Component Csm1-860010474012 (21.5mm,20.75mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8007.445mil|Location2.X=8018.695mil|Location1.Y=5331.315mil|Location2.Y=5342.565mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8007.445mil|Location2.X=8018.695mil|Location1.Y=5331.315mil|Location2.Y=5342.565mil|Absolute=True">Component Clearance Constraint: (Collision &lt; 0.254mm) Between SIP Component J?-TSW-104-08-L-S (24.275mm,23.5mm) on Top Layer And Small Component Csm4-860010474012 (13mm,20.75mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7607.326mil|Location2.X=7618.576mil|Location1.Y=4767.961mil|Location2.Y=4779.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\MicroMMC_SM_Cap\MicroMMC_SM_Cap.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7607.326mil|Location2.X=7618.576mil|Location1.Y=4767.961mil|Location2.Y=4779.211mil|Absolute=True">Component Clearance Constraint: (Collision &lt; 0.254mm) Between Small Component Csm7-860010474012 (4.5mm,12.5mm) on Bottom Layer And Small Component R1-R_TH (1.38mm,7.9mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
